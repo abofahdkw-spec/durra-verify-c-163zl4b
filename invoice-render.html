@@ -120,7 +120,7 @@ else{
   const grand=(Number(d.total)||0).toFixed(3),paid=(Number(d.paid)||0).toFixed(3),rem=((Number(d.total)||0)-(Number(d.paid)||0)).toFixed(3);
   const cname=d.seller||DurraCompany.getFor(d.company||URLCOMPANY), cparts=DurraCompany.split(cname);
   paper.innerHTML=`<div class="v">
-    <div class="top"><div class="co"><div class="co-n">${esc(cparts.main)}</div><div class="co-s">${esc(cparts.sub)}</div><div class="co-e">${cname===DurraCompany.DEFAULT?'AL-DURRA AL-OMRANIAH · GENERAL TRADING & CONTRACTING':''}</div><div class="co-p">هاتف: +965 2225 1100 | سجل: 12345678</div></div><div class="title"><div class="ar">فاتورة</div><div class="en">INVOICE</div></div><div class="qr"><div id="qr"></div><div class="cap">امسح للتحقق</div></div></div>
+    <div class="top"><div class="co"><div class="co-n">${esc(cparts.main)}</div><div class="co-s">${esc(cparts.sub)}</div><div class="co-e"></div><div class="co-p">هاتف: ${esc(d.sellerPhone||'—')} | سجل: ${esc(d.sellerCr||'—')}</div></div><div class="title"><div class="ar">فاتورة</div><div class="en">INVOICE</div></div><div class="qr"><div id="qr"></div><div class="cap">امسح للتحقق</div></div></div>
     <div class="grid"><div class="col"><div class="f"><span class="k">رقم الفاتورة / No.</span><span class="v">${esc(d.no||'')}</span></div><div class="f"><span class="k">التاريخ / Date</span><span class="v">${esc(d.date||'')}</span></div><div class="f"><span class="k">الدفع / Payment</span><span class="v">${esc(d.payment||'نقدي / Cash')}</span></div></div><div class="col"><div class="f"><span class="k">المشتري / Buyer</span><span class="v">${esc(d.buyer||'—')}</span></div><div class="f"><span class="k">هاتف المشتري / Phone</span><span class="v">${esc(d.phone||'—')}</span></div><div class="f"><span class="k">سجل المشتري / Reg.</span><span class="v">${esc(d.cr||'—')}</span></div></div></div>
     <table><thead><tr><th>#</th><th>الصنف / Product</th><th>السعر / Price</th><th>الكمية / Qty</th><th>المبلغ / Amount</th></tr></thead><tbody>${rows}</tbody><tfoot><tr><td colspan="4" style="text-align:right">المجموع / Total</td><td class="num">${grand}</td></tr></tfoot></table>
     <div class="mid"><div class="note">شكراً لتعاملكم معنا.</div><div class="tot"><div class="r"><span>المسدد / Paid</span><span>${paid}</span></div><div class="r"><span>المتبقي / Remaining</span><span>${rem}</span></div><div class="r g"><span>الإجمالي / Total</span><span>${grand}</span></div><div class="words">كتابةً / In words: ${price(grand)}</div></div></div>
@@ -141,7 +141,7 @@ if(DOCURL){
   fetch(DOCURL)
     .then(r=>r.ok?r.json():null)
     .then(rec=>render(rec?{
-      company:rec.company,seller:rec.seller||'',no:rec.no,date:rec.date,buyer:rec.buyer,phone:rec.buyerPhone,cr:rec.buyerCr,
+      company:rec.company,seller:rec.seller||'',sellerPhone:rec.sellerPhone,sellerCr:rec.sellerCr,no:rec.no,date:rec.date,buyer:rec.buyer,phone:rec.buyerPhone,cr:rec.buyerCr,
       items:(Array.isArray(rec.items)?rec.items:[]).map(it=>({p:it.p,pr:it.pr,q:it.q,a:it.a})),
       total:rec.total,paid:rec.paid||0,payment:rec.payment||'نقدي / Cash'
     }:null))
