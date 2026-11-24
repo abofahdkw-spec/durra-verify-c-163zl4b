@@ -1,6 +1,6 @@
 /* الاسم المعروض للشركة — مصدر واحد لكل الصفحات */
 (function(){
-  var DEFAULT='شركة الدرة العمرانية للتجارة العامة والمقاولات';
+  var DEFAULT='اسم الشركة';
   var GKEY='durra_company_name_global';
   function keyFor(id){ return 'durra_company_name_'+(id||'default'); }
   function get(){
@@ -34,7 +34,7 @@
     each('[data-company-main]',function(el){ el.textContent=parts.main; });
     each('[data-company-sub]',function(el){ el.textContent=parts.sub; });
     each('[data-company-empty]',function(el){ el.textContent=''; });
-    document.title=document.title.split(DEFAULT).join(name).split('الدرة العمرانية').join(parts.main);
+    document.title=document.title.split(DEFAULT).join(name);
     notify();
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',apply); else apply();
