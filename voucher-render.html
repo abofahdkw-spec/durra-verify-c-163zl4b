@@ -124,7 +124,7 @@ const v=document.getElementById('voucher');
 function render(d){
 if(d && d.company && d.company!==URLCOMPANY && URLCOMPANY!=='default'){
   v.innerHTML='<p style="text-align:center;padding:40px;color:#dc2626;font-size:20px;font-weight:800">هذا السند لشركة أخرى<br><span style="font-size:13px;color:#888">barcode belongs to a different company — access denied</span></p>';
-  d=null;
+  return;
 }
 if(!d){ v.innerHTML='<p style="text-align:center;padding:40px">لا توجد بيانات / No data</p>'; }
 else{

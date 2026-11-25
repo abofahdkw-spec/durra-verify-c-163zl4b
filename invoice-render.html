@@ -108,10 +108,10 @@ const hash=(location.hash||'').replace(/^#\/?/,'');
 const URLCOMPANY=new URLSearchParams(location.search).get('company')||'default';
 const legacy=dec(new URLSearchParams(hash).get('d')||'');
 function render(d){
-/* منع عرض مستندات شركة أخرى */
+/* منع عرض مستندات شركة أخرى — نخرج فوراً حتى لا تُستبدل رسالة المنع بـ«لا توجد بيانات» */
 if(d && d.company && d.company!==URLCOMPANY && URLCOMPANY!=='default'){
-  d=null;
   document.getElementById('paper').innerHTML='<div style="padding:60px;text-align:center;color:#dc2626;font-size:20px;font-weight:800">هذا المستند لشركة أخرى<br><span style="font-size:13px;color:#888">document belongs to a different company — access denied</span></div>';
+  return;
 }
 const paper=document.getElementById('paper');
 if(!d){paper.innerHTML='<p style="padding:40px;text-align:center">لا توجد بيانات / No data</p>'}
